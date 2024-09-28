@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Video } from "./components/video";
+
 
 function App() {
   const [videoId, setVideoId] = useState(""); // State for the video ID input
@@ -71,6 +73,7 @@ function App() {
           />
         </label>
         <br />
+        <Video />
         <button type="submit">Submit Detection Result</button>
       </form>
 
