@@ -1,6 +1,8 @@
-Run this project
+This project is a work in progress - as it has only run on 11GB of data.
 
-Add data folder and files in app/fastapi
+Can be accessed her http://65.21.107.207:8501/
+
+Please note train5.py is the most up to date training file need to clean up!
 
 Create docker images - need to navigate to the folders
 
