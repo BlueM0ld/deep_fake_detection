@@ -1,0 +1,46 @@
+version: '3.8'  # Use version 3.8 (Docker Swarm)
+
+services:
+  fastapi:
+    build:
+      context: ./backend/fastapi  # Path to the FastAPI Dockerfile
+      dockerfile: ./Dockerfile     # Specify the Dockerfile (optional if it is named 'Dockerfile')
+    image: deep_fake_detection-fastapi:latest  # Tag the built image
+    ports:
+      - "8000:8000"
+    deploy:
+      resources:
+        limits:
+          memory: 2G  # Set max memory to 4GB
+        reservations:
+          memory: 1G  # Reserved memory for FastAPI
+
+  streamlit:
+    build:
+      context: ./app/streamlit  # Path to the Streamlit Dockerfile
+      dockerfile: ./Dockerfile   # Specify the Dockerfile (optional if it is named 'Dockerfile')
+    image: deep_fake_detection-streamlit:latest  # Tag the built image
+    ports:
+      - "8501:8501"
+    deploy:
+      resources:
+        limits:
+          memory: 3G  # Set max memory to 4GB
+        reservations:
+          memory: 1G  # Reserved memory for Streamlit
+
+  db:
+    build:
+      context: ./backend/postgres  # Path to the PostgreSQL Dockerfile
+      dockerfile: ./Dockerfile      # Specify the Dockerfile (optional if it is named 'Dockerfile')
+    image: deep_fake_detection-db:latest  # Tag the built image
+    ports:
+      - "5432:5432"
+    deploy:
+      resources:
+        limits:
+          memory: 512m  
+        reservations:
+          memory: 512m  
+volumes:
+  db_data:
